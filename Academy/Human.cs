@@ -36,9 +36,9 @@ namespace Academy
 		}
 		public Human(Human other)
 		{
-			this.First_Name= other.First_Name;
+			this.First_Name = other.First_Name;
 			this.Age = other.Age;
-			this.Last_Name=other.Last_Name;
+			this.Last_Name = other.Last_Name;
 			//Console.WriteLine($"H_Copy_Constructor {this.GetHashCode()}");
 		}
 		~Human()
@@ -47,11 +47,22 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return  $"{GetType().ToString().Split('.').Last()}:".PadRight(12) + $"{Last_Name.PadRight(last_name_width)}{First_Name.PadRight(first_name_width)}{Age.ToString().PadRight(age_width)}";
+			return $"{GetType().ToString().Split('.').Last()}:".PadRight(12) + $"{Last_Name.PadRight(last_name_width)}{First_Name.PadRight(first_name_width)}{Age.ToString().PadRight(age_width)}";
 		}
 		public virtual string ToStringFile()
 		{
-			return $"{GetType().ToString().Split('.').Last()}:"+ $"{Last_Name},{First_Name},{Age.ToString()};";
+			return $"{GetType().ToString().Split('.').Last()}:" + $"{Last_Name},{First_Name},{Age.ToString()};";
 		}
+
+		public virtual void Init(string[] values)
+		{
+			Last_Name = values[1];
+			First_Name = values[2];
+			Age = Convert.ToInt32(values[3]);
+		}
+
+
+
+
 	}
 }

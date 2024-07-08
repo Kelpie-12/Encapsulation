@@ -1,16 +1,22 @@
 ﻿//#define inheritance_1
 //#define inheritance_2
+//#define save_to_file
+#define load_from_file
 using System;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 namespace Academy
 {
 	internal class Program
 	{
 		static readonly string delimiter = "\n-------------------------------------------------\n";
-
+		static Program() 
+		{
+			Directory.SetCurrentDirectory("..\\..");
+		}
 		//static Human[] Load(string filename)
 		//{
 		//	StreamReader read = new StreamReader(filename);
@@ -113,8 +119,57 @@ namespace Academy
 		//	read.Close();
 		//	return result;
 		//}
+		static Human[] Load(string filename)
+		{
+			//Directory.SetCurrentDirectory("..\\..");
+			List<Human> group = new List<Human>();
+			if (File.Exists(filename))
+			{
+				StreamReader sr = new StreamReader(filename);
+				while (!sr.EndOfStream)
+				{
+					string buffer = sr.ReadLine();
+					// Console.WriteLine(buffer);
+					if (buffer.Length == 0)
+						continue;
+					string[] values = buffer.Split(':', ',', ';');
+					group.Add(HumanFactory(values.First()));
+					group.Last().Init(values);
+				}
+				sr.Close(); 
+			}
+			else
+			{
+                Console.WriteLine("Error: File not found");
+            }
+
+			return group.ToArray();
+		}
+		static Human HumanFactory(string type)
+		{
+			Human human = null;
+			switch (type)
+			{
+				case "Human":
+					human = new Human("", "", 0);
+					break;
+				case "Teacher":
+					human = new Teacher("", "", 0, "", "");
+					break;
+				case "Student":
+					human = new Student("", "", 0, "", "", 0, 0);
+					break;
+				case "Graduate":
+					human = new Graduate("", "", 0, "", "", 0, 0, "");
+					break;
+				default:
+					break;
+			}
+			return human;
+		}
 		static void Save(ref Human[] group, string name_file)
 		{
+			//Directory.SetCurrentDirectory("..\\..");
 			StreamWriter writer = new StreamWriter(name_file);
 			for (int i = 0; i < group.Length; i++)
 			{
@@ -130,7 +185,7 @@ namespace Academy
 				Console.WriteLine(group[i]);
 				Console.WriteLine(delimiter);
 			}
-		}	
+		}
 		static void Main(string[] args)
 		{
 #if inheritance_1
@@ -158,19 +213,24 @@ namespace Academy
 			Console.WriteLine(teacher);
 			Console.WriteLine(delimiter);
 #endif
+#if save_to_file
 			Human[] group = new Human[]
-			{
+				{
 				new Human("John", "Doe", 20),
 				new Human("Elon", "Musk", 55),
 				new Student("Jane", "Doe", 22, "Math", "223", 95, 97),
 				new Teacher("W", "W", 50, "math", "25"),
 				new Graduate("Schrader", "Hank", 40, "Criminalistic", "Obn", 85, 75, "How meet your mother"),
-			};
+				};
 			Print(ref group);
-			Save(ref group, "group.txt");
-			//Human[] group_test = Load("group.txt");
-			//Print(ref group_test);			
-			
+			Save(ref group, "group.csv");
+			Human[] group_test = Load("group.csv"); 
+#endif
+			//Print(ref group_test);	
+#if load_from_file
+			Human[] group2 = Load("group.csv");
+			Print(ref group2); 
+#endif
 
 		}
 	}
