@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 
 namespace Academy
@@ -46,7 +47,11 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return  $"{GetType()}:".PadRight(20) + $"{Last_Name.PadRight(last_name_width)}{First_Name.PadRight(first_name_width)}{Age.ToString().PadRight(age_width)}";
+			return  $"{GetType().ToString().Split('.').Last()}:".PadRight(12) + $"{Last_Name.PadRight(last_name_width)}{First_Name.PadRight(first_name_width)}{Age.ToString().PadRight(age_width)}";
+		}
+		public virtual string ToStringFile()
+		{
+			return $"{GetType().ToString().Split('.').Last()}:"+ $"{Last_Name},{First_Name},{Age.ToString()};";
 		}
 	}
 }

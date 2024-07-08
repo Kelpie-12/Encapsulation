@@ -35,7 +35,10 @@ namespace Academy
 		{
 			return base.ToString() + $"{subject.PadRight(subject_width)}";
 		}
-
+		public override string ToStringFile()
+		{
+			return base.ToStringFile().Replace(";", ",") + $"{subject};";
+		}
 
 	}
 }
