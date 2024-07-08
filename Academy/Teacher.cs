@@ -10,7 +10,8 @@ namespace Academy
 	internal class Teacher:Human
 	{
 		private string speciality;
-
+		static public readonly int SPECIALITY_WIDTH = 20;
+		static public readonly int EXPERIENCE_WIDTH =8;
 		public string Speciality
 		{
 			get { return speciality; }
@@ -28,22 +29,21 @@ namespace Academy
 		{
 			Speciality = speciality;		
 			Experience = experience;
-			Console.WriteLine($"T_Constructor {this.GetHashCode()}");
+			//Console.WriteLine($"T_Constructor {this.GetHashCode()}");
 		}
 		public Teacher(Human human,string speciality,string experience):base(human)
 		{
 			Speciality = speciality;
 			Experience = experience;
-			Console.WriteLine($"T_Constructor {this.GetHashCode()}");
+			//Console.WriteLine($"T_Constructor {this.GetHashCode()}");
 		}
 		~Teacher()
-		{
-			Console.WriteLine($"T_Destructor {this.GetHashCode()}");
+		{//Console.WriteLine($"T_Destructor {this.GetHashCode()}");
 		}
 
 		public override string ToString()
 		{
-			return base.ToString() + $" {Speciality} {Experience} ";
+			return base.ToString() + $"{speciality.PadRight(SPECIALITY_WIDTH)}{experience.ToString().PadRight(EXPERIENCE_WIDTH)}"; ;
 		}
 	}
 }

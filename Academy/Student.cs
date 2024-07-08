@@ -9,10 +9,10 @@ namespace Academy
 {
 	internal class Student : Human
 	{
-		static readonly int specialiity_width = 25;
-		static readonly int group_width = 8;
-		static readonly int rating_width = 8;
-		static readonly int attendance_width = 8;
+		static public readonly int specialiity_width = 20;
+		static public readonly int group_width = 8;
+		static	public readonly int rating_width = 8;
+		static public readonly int attendance_width = 8;
 		private string speciality;
 		public string Speciality
 		{
@@ -48,7 +48,7 @@ namespace Academy
 			Rating = reting;
 			Group = groop;
 			Speciality = speciality;
-			Console.WriteLine($"S_Constructor {this.GetHashCode()}");
+			//Console.WriteLine($"S_Constructor {this.GetHashCode()}");
 		}
 		public Student(Human human, string speciality, string groop, double reting, double attendance) : base(human)
 		{
@@ -63,16 +63,16 @@ namespace Academy
 			Rating = other.Rating;
 			Group = other.Group;
 			Speciality = other.Speciality;
-			Console.WriteLine($"S_Copy_Constructor {this.GetHashCode()}");
+			//Console.WriteLine($"S_Copy_Constructor {this.GetHashCode()}");
 		}
 		~Student()
 		{
-			Console.WriteLine($"S_Destructor {this.GetHashCode()}");
+			//Console.WriteLine($"S_Destructor {this.GetHashCode()}");
 		}
 
 		public override string ToString()
 		{
-			return base.ToString() + $" {Speciality.PadRight(specialiity_width)} {Group.PadRight(group_width)} {Attendance.ToString().PadRight(attendance_width)} {Rating.ToString().PadRight(rating_width)} ";
+			return base.ToString() + $"{Speciality.PadRight(specialiity_width)}{Group.PadRight(group_width)}{Attendance.ToString().PadRight(attendance_width)}{Rating.ToString().PadRight(rating_width)}";
 		}
 
 
