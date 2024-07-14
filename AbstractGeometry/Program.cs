@@ -16,10 +16,13 @@ namespace AbstractGeometry
 			Graphics graphics=  Graphics.FromHwnd(hwnd);
 			System.Drawing.Rectangle window_rectangle = new System.Drawing.Rectangle(Console.WindowLeft, Console.WindowTop, Console.WindowWidth, Console.WindowHeight);
 			PaintEventArgs e = new PaintEventArgs(graphics, window_rectangle);
+			
 			Rectangle a = new Rectangle(50, 100, 300, 0, 10, Color.Red);
-			a.Info(e);
+			//a.Info(e);
+
 			Circle b =new Circle(300,180, 50,10,Color.White);			
-			b.Info(e);
+			//b.Info(e);
+
 			Point[] points_triangle = new Point[3];
 			Random rand = new Random();
 			for (int i = 0; i < points_triangle.Length; i++)
@@ -29,6 +32,10 @@ namespace AbstractGeometry
 			}
 			Triangle c = new Triangle(ref points_triangle, 10, Color.Green);
 			c.Info(e);
+
+			Square d = new Square(200, 100, 15, Color.White, 100);
+			//d.Info(e);
+
 
 		}
 		[DllImport("kernel32.dll")]

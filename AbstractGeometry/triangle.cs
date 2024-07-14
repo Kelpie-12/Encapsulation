@@ -47,7 +47,7 @@ namespace AbstractGeometry
 				}
 			}
 		}
-
+		
 		public Triangle(ref Point[] points2, int line_width, Color color) : base(points2[0].X, points2[0].Y, line_width, color)
 		{
 			points = new Point[3] { new Point(points2[0].X, points2[0].Y), new Point(points2[1].X, points2[1].Y), new Point(points2[2].X, points2[2].Y) };
