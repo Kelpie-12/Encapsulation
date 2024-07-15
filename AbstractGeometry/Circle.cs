@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AbstractGeometry
 {
-	internal class Circle:Shape
+	internal class Circle:Shape,IHaveDiameter
 	{
 		public Circle(int x, int y, int radius, int line_width, Color color):base(x,y,line_width,color) 
 		{
@@ -32,10 +32,15 @@ namespace AbstractGeometry
 		{
 			return 2 * 3.14 * Radius;
 		}
+		public double Get_Diameter()
+		{
+			return radius * 2;
+		}
 		public override string ToString()
 		{
 			string result = "";
-			result += $"Radius:\t{Radius}\n";			
+			result += $"Radius:\t{Radius}\n";
+			result += $"Diameter:{Get_Diameter()}\n";
 			result += base.ToString();
 			return result;
 		}
