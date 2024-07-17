@@ -9,7 +9,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace AbstractGeometry
 {
-	internal class Triangle : Shape
+	internal class Triangle : Shape,IDrawable
 	{
 		private Point[] points;
 		public Point[] Points
