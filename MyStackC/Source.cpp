@@ -254,17 +254,16 @@ public:
 			}
 		}
 	}
-	void Push_Front(T sourse)
+	void Push_Front(T source)
 	{
 		node* new_element = new node;
-		new_element->data = sourse;
-		head->prew = new_element;
-
-		new_element->next = head;
-		
-		new_element->prew = nullptr;
-
-				
+		new_element->data = source;
+		node* move;
+		move = head;
+		new_element->prew = move->prew;
+		new_element->next = move;
+		move->prew->next = new_element;
+		move->prew = new_element;
 		count++;
 	}
 
