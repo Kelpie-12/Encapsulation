@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Binary_Tree
 {
-	internal class Tree
+	internal class Tree : IEnumerable
 	{
+	
 		public class Element
-		{
+		{			
 			public int data;
 			public Element p_left;
 			public Element p_right;
@@ -139,6 +141,11 @@ namespace Binary_Tree
 		public void Print()
 		{
 			Print(root);
+		}
+
+		public IEnumerator GetEnumerator()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

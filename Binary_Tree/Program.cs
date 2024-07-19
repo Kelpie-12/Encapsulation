@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//#define tree_base_check
+using System;
+
 
 namespace Binary_Tree
 {
@@ -13,7 +11,8 @@ namespace Binary_Tree
 			Random random = new Random(0);
 			Console.WriteLine("Введите размер дерева");
 			int n = Convert.ToInt32(Console.ReadLine());
-			Tree tree = new Tree();
+#if tree_base_check
+			UniqurTree tree = new UniqurTree();
 			for (int i = 0; i < n; i++)
 			{
 				tree.Insert(random.Next(100));
@@ -29,8 +28,9 @@ namespace Binary_Tree
 			Console.WriteLine($"Max_Value = {tree.Max_Value()}");
 			Console.WriteLine();
 			Console.WriteLine($"AGV = {tree.AGV()}");
-			Console.WriteLine();
-
+			Console.WriteLine(); 
+#endif
+			Tree tree=new Tree() { };
 
 		}
 	}
