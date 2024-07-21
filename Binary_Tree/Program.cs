@@ -12,7 +12,7 @@ namespace Binary_Tree
 			//Console.WriteLine("Введите размер дерева");
 			//int n = Convert.ToInt32(Console.ReadLine());
 #if tree_base_check
-			UniqurTree tree = new UniqurTree() { 36,55,11,22,100,10,20,30, };
+			UniqurTree tree = new UniqurTree() { 36,55,11,22,100,100,100,10,20,30, };
 			//for (int i = 0; i < n; i++)
 			//{
 			//	tree.Insert(random.Next(100));

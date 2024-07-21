@@ -8,7 +8,7 @@ namespace Binary_Tree
 {
 	internal class UniqurTree: Tree
 	{
-		private void Insert(int data, Element root)
+		protected override void Insert(int data, Element root)
 		{
 			if (this.root == null)
 			{

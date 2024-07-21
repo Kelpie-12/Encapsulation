@@ -137,7 +137,7 @@ namespace Binary_Tree
 			Clear(ref root.p_left);
 			root = null;
 		}
-		private void Insert(int data, Element root)
+		protected virtual void Insert(int data, Element root)
 		{
 			if (this.root == null)
 			{
