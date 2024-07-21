@@ -1,17 +1,41 @@
-﻿using System;
+﻿#define IEnumerable_IEnumerator
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Binary_Tree
 {
-	internal class Tree : IEnumerable
+	internal class Tree:IEnumerable,IEnumerator
 	{
-	
+
+#if IEnumerable_IEnumerator
+		public IEnumerator GetEnumerator()
+		{
+			return this;
+		}
+		public bool MoveNext()
+		{
+			if (root == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		public void Reset()
+		{
+			root = null;
+		}
+		public object Current
+		{
+			get { return root.data; }
+		} 
+#endif
 		public class Element
-		{			
+		{
 			public int data;
 			public Element p_left;
 			public Element p_right;
@@ -30,12 +54,88 @@ namespace Binary_Tree
 		public Element root;
 		public Tree()
 		{
-
 			//Console.WriteLine($"TConstructor:\t{GetHashCode()}");
 		}
 		~Tree()
 		{
 			//Console.WriteLine($"TDestructor:\t{GetHashCode()}");
+		}
+		public void Add(int data)
+		{
+			Insert(data);
+		}
+		public int Depth()
+		{
+			return Depth(ref root);
+		}
+		private int Depth(ref Element root)
+		{
+			if (root == null)
+			{
+				return 0;
+			}
+			int left_depth = Depth(ref root.p_left) + 1;
+			int right_depth = Depth(ref root.p_right) + 1;
+			if (left_depth > right_depth)
+			{
+				return left_depth;
+			}
+			else
+			{
+				return right_depth;
+			}
+		}
+		public void Erase(int data)
+		{
+			Erase(ref root, data);
+		}
+		private void Erase(ref Element root, int data)
+		{
+
+			if (root == null)
+			{
+				return;
+			}
+			if (data == root.data)
+			{
+				if (root.p_left == null && root.p_right == null)
+				{
+					root = null;
+				}
+				else
+				{
+					if (Count_Element(root.p_left) > Count_Element(root.p_right))
+					{
+						root.data = Max_Value(root.p_left);
+						Erase(ref root.p_left, Max_Value(root.p_left));
+					}
+					else
+					{
+						root.data = Min_Value(root.p_right);
+						Erase(ref root.p_right, Max_Value(root.p_right));
+					}
+				}
+			}
+			if (root != null)
+			{
+				Erase(ref root.p_left, data);
+				Erase(ref root.p_right, data);
+			}
+		}
+		public void Clear()
+		{
+			Clear(ref root);
+		}
+		private void Clear(ref Element root)
+		{
+			if (root == null)
+			{
+				//Console.WriteLine("Clear");
+				return;
+			}
+			Clear(ref root.p_left);
+			Clear(ref root.p_left);
+			root = null;
 		}
 		private void Insert(int data, Element root)
 		{
@@ -82,8 +182,8 @@ namespace Binary_Tree
 				return Count_Element(root.p_left) + Count_Element(root.p_right) + 1;
 		}
 		public int Count_Element()
-		{ 
-			return Count_Element(this.root); 
+		{
+			return Count_Element(this.root);
 		}
 		private int Sum_Tree(Element root)
 		{
@@ -119,7 +219,6 @@ namespace Binary_Tree
 		{
 			return Min_Value(this.root);
 		}
-
 		private double AGV(Element root)
 		{
 			return (double)Sum_Tree(root) / Count_Element(root);
@@ -142,10 +241,39 @@ namespace Binary_Tree
 		{
 			Print(root);
 		}
-
-		public IEnumerator GetEnumerator()
+		private void Print_Tree(Element root, int depth)
 		{
-			throw new NotImplementedException();
+			if (root == null)
+			{
+				return;
+			}
+			int count = 2;
+			depth += 2;
+			Print_Tree(root.p_right, depth);
+			for (int i = count; i < depth; i++)
+			{
+				Console.Write("  ");
+			}
+			Console.Write($"{root.data}\n");
+			Print_Tree(root.p_left, depth);
+			//if (root == null)
+			//{               
+			//             return;
+			//}
+
+			//for (int i = 0; i < depth; i++)
+			//{
+			//	Console.Write("|  ");
+			//}
+			//Console.Write($"\b\b--{root.data}\n");
+			//Print_Tree(root.p_left, depth + 1);
+			//Print_Tree(root.p_right, depth + 1);
+
 		}
+		public void Print_Tree()
+		{
+			Print_Tree(root, 0);
+		}
+
 	}
 }
