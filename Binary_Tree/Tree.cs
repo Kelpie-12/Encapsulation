@@ -1,7 +1,7 @@
 ﻿#define IEnumerable_IEnumerator
 using System;
 using System.Collections;
-using System.Collections.Generic;
+
 
 
 namespace Binary_Tree
@@ -27,7 +27,7 @@ namespace Binary_Tree
 		}
 		public void Reset()
 		{
-			root = null;
+			//root = null;
 		}
 		public object Current
 		{
