@@ -1,6 +1,7 @@
 ﻿//#define tree_base_check
 
 using System;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 
 
@@ -40,6 +41,7 @@ namespace Binary_Tree
 			//Console.WriteLine($"AGV = {tree.AGV()}");
 			//Console.WriteLine(); 
 #endif
+#if false
 			Tree tree = new Tree() { 36, 55, 11, 22, 100, 100, 100, 10, 20, 30, 10100 };
 			for (int i = 0; i < n; i++)
 			{
@@ -50,11 +52,29 @@ namespace Binary_Tree
 			TreePerformance.Measure("Sum_Tree ", tree.Sum_Tree);
 			TreePerformance.Measure("Count_Element ", tree.Count_Element);
 			TreePerformance.Measure("Depth ", tree.Depth);
+			TreePerformance.Measure("AGV ", tree.AGV);
 			//Stopwatch sw= new Stopwatch();
 			//sw.Start();
 			//Console.WriteLine($"Depth = {tree.Depth()}");
 			//sw.Stop();
-			//         Console.WriteLine($"Time -> {sw.Elapsed.TotalMilliseconds}");
+			//Console.WriteLine($"Time -> {sw.Elapsed.TotalMilliseconds}");  
+#endif
+			Red_black_tree a = new Red_black_tree();
+			a.root = null;			
+			a.root=a.Insert(ref a.root, 10);
+			//for (int i = 0; i < n; i++)
+			//{
+			//	a.Insert(random.Next(100));
+			//}
+			a.Insert(40);
+			a.Insert(20);
+			a.Insert(50);
+			a.Insert(10);
+			a.Insert(30);
+			a.Insert(25);
+			//a.Insert(13);
+			//a.Insert(6);
+			a.Print();
 
 		}
 	}
